@@ -63,7 +63,7 @@ st.markdown("""
     }
     
     [data-testid="stMetricLabel"] {
-        color: #A0AEC0 !important;
+        color: ##FFFFFF !important;
         font-size: 12px !important;
         font-weight: 500 !important;
         text-transform: uppercase;
