@@ -306,7 +306,7 @@ st.sidebar.markdown("""
     <strong style='color: #E2E8F0;'>Built by Dennis Schmal</strong><br>
     Supply Chain Digitalization Manager<br><br>
     <a href='https://dennisschmal.de' style='color: #3182CE;'>Website</a> • 
-    <a href='https://github.com/dschmahl' style='color: #3182CE;'>GitHub</a>
+    <a href='https://github.com/dschmal' style='color: #3182CE;'>GitHub</a>
 </div>
 """, unsafe_allow_html=True)
 
