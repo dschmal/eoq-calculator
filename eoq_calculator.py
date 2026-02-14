@@ -21,7 +21,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS - Dennis Schmal Brand Style
+# Custom CSS - Fixed for readability in both light and dark modes
 st.markdown("""
     <style>
     /* Main styling */
@@ -31,56 +31,88 @@ st.markdown("""
     
     /* Header styling */
     h1 {
-        color: #0A2540;
+        color: #0066FF !important;
         font-weight: 700;
         border-bottom: 3px solid #0066FF;
         padding-bottom: 10px;
     }
     
     h2 {
-        color: #0066FF;
+        color: #0066FF !important;
         font-weight: 600;
         margin-top: 30px;
     }
     
     h3 {
-        color: #0A2540;
+        color: #0066FF !important;
         font-weight: 500;
     }
     
-    /* Metrics styling */
-    .stMetric {
-        background: linear-gradient(135deg, #f0f2f6 0%, #ffffff 100%);
+    /* CRITICAL FIX: Metrics styling with proper contrast */
+    [data-testid="stMetric"] {
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
         padding: 20px;
         border-radius: 12px;
         border-left: 4px solid #0066FF;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
     
-    .stMetric label {
-        color: #0A2540;
-        font-weight: 600;
+    /* Metric label - dark text */
+    [data-testid="stMetricLabel"] {
+        color: #0A2540 !important;
+        font-weight: 600 !important;
+        font-size: 14px !important;
     }
     
-    .stMetric .metric-value {
-        color: #0066FF;
-        font-size: 28px;
-        font-weight: 700;
+    /* Metric value - DARK TEXT for readability */
+    [data-testid="stMetricValue"] {
+        color: #0066FF !important;
+        font-size: 32px !important;
+        font-weight: 700 !important;
+    }
+    
+    /* Metric delta */
+    [data-testid="stMetricDelta"] {
+        color: #00B894 !important;
+    }
+    
+    /* Caption text below metrics - dark */
+    .caption {
+        color: #666 !important;
+        font-size: 12px;
     }
     
     /* Sidebar styling */
-    .css-1d391kg {
+    section[data-testid="stSidebar"] {
         background-color: #f8f9fa;
     }
     
-    /* Info boxes */
+    section[data-testid="stSidebar"] h2 {
+        color: #0A2540 !important;
+    }
+    
+    section[data-testid="stSidebar"] label {
+        color: #0A2540 !important;
+        font-weight: 500;
+    }
+    
+    /* Info boxes - better contrast */
     .stAlert {
         border-radius: 10px;
         border-left: 4px solid #0066FF;
     }
     
+    [data-baseweb="notification"] {
+        background-color: #e3f2fd;
+        border-left: 4px solid #0066FF;
+    }
+    
+    [data-baseweb="notification"] p {
+        color: #0A2540 !important;
+    }
+    
     /* Success boxes */
-    .stSuccess {
+    .element-container div[data-baseweb="notification"][kind="success"] {
         background-color: #e8f5e9;
         border-left: 4px solid #00B894;
     }
@@ -88,7 +120,7 @@ st.markdown("""
     /* Buttons */
     .stButton > button {
         background-color: #0066FF;
-        color: white;
+        color: white !important;
         font-weight: 600;
         border-radius: 8px;
         border: none;
@@ -101,36 +133,48 @@ st.markdown("""
         box-shadow: 0 4px 8px rgba(0,102,255,0.3);
     }
     
+    /* Download button */
+    .stDownloadButton > button {
+        background-color: #00B894;
+        color: white !important;
+        font-weight: 600;
+    }
+    
+    .stDownloadButton > button:hover {
+        background-color: #009874;
+    }
+    
     /* Tech badge */
     .tech-badge {
         display: inline-block;
         background-color: #0A2540;
         color: white;
-        padding: 4px 12px;
+        padding: 6px 14px;
         border-radius: 20px;
-        font-size: 12px;
+        font-size: 13px;
         font-weight: 600;
-        margin: 2px;
+        margin: 3px;
     }
     
     /* Author card */
     .author-card {
         background: linear-gradient(135deg, #0A2540 0%, #0066FF 100%);
         color: white;
-        padding: 20px;
+        padding: 25px;
         border-radius: 12px;
         margin: 20px 0;
         box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
     
     .author-card h3 {
-        color: white;
+        color: white !important;
         margin-bottom: 10px;
     }
     
     .author-card p {
-        color: rgba(255,255,255,0.9);
-        margin: 5px 0;
+        color: rgba(255,255,255,0.95);
+        margin: 8px 0;
+        line-height: 1.6;
     }
     
     .author-card a {
@@ -145,11 +189,12 @@ st.markdown("""
     
     /* Built by badge */
     .built-by {
-        background-color: #f0f2f6;
+        background-color: #f8f9fa;
         border-left: 4px solid #0066FF;
         padding: 15px;
         border-radius: 8px;
         margin: 20px 0;
+        color: #0A2540;
     }
     
     /* Deployment info */
@@ -160,6 +205,51 @@ st.markdown("""
         padding: 12px;
         margin: 10px 0;
         font-size: 13px;
+        color: #0A2540 !important;
+    }
+    
+    .deploy-info strong {
+        color: #0066FF;
+    }
+    
+    /* Expander */
+    .streamlit-expanderHeader {
+        background-color: #f8f9fa;
+        color: #0A2540 !important;
+        font-weight: 600;
+    }
+    
+    /* Tables */
+    .dataframe {
+        font-size: 14px;
+    }
+    
+    .dataframe th {
+        background-color: #0066FF !important;
+        color: white !important;
+        font-weight: 600;
+    }
+    
+    .dataframe td {
+        color: #0A2540 !important;
+    }
+    
+    /* Code blocks */
+    code {
+        background-color: #f8f9fa;
+        color: #0066FF;
+        padding: 2px 6px;
+        border-radius: 4px;
+    }
+    
+    pre {
+        background-color: #f8f9fa;
+        border-left: 3px solid #0066FF;
+        padding: 12px;
+        border-radius: 6px;
+    }
+    
+    pre code {
         color: #0A2540;
     }
     </style>
@@ -169,10 +259,10 @@ st.markdown("""
 st.markdown("""
     <div style='text-align: center; padding: 20px 0;'>
         <h1 style='font-size: 42px; margin-bottom: 5px;'>📦 EOQ Calculator</h1>
-        <p style='font-size: 18px; color: #666; margin-bottom: 5px;'>
-            <strong>Built by Dennis Schmal</strong> | Supply Chain Digitalization Manager
+        <p style='font-size: 18px; color: #0066FF; margin-bottom: 5px; font-weight: 600;'>
+            Built by Dennis Schmal | Supply Chain Digitalization Manager
         </p>
-        <p style='font-size: 14px; color: #888;'>
+        <p style='font-size: 14px; color: #666;'>
             Optimize inventory decisions with data-driven calculations
         </p>
     </div>
@@ -196,10 +286,9 @@ to minimize inventory costs while maintaining service levels. Built in 2 hours, 
 saving companies thousands in inventory carrying costs.
 """)
 
-# Sidebar inputs with better organization
+# Sidebar inputs
 st.sidebar.markdown("## 🎯 Input Parameters")
 
-# Collapsible sections in sidebar
 with st.sidebar.expander("📊 Demand & Costs", expanded=True):
     annual_demand = st.number_input(
         "Annual Demand (units)",
@@ -265,15 +354,17 @@ with st.sidebar.expander("⏱️ Lead Time & Service", expanded=True):
         help="Coefficient of Variation: How much demand fluctuates (StdDev/Mean × 100)"
     )
 
-# Add deployment info in sidebar
+# Deployment info in sidebar
 st.sidebar.markdown("---")
 st.sidebar.markdown("""
     <div class='deploy-info'>
         <strong>⚡ Live Production Tool</strong><br>
+        <span style='color: #0A2540;'>
         Built: 2024<br>
         Tech: Python + Streamlit<br>
         Hosted: Streamlit Cloud<br>
         Users: 500+ calculations/month
+        </span>
     </div>
     """, unsafe_allow_html=True)
 
@@ -282,7 +373,6 @@ holding_cost_per_unit = unit_cost * (holding_cost_pct / 100)
 eoq = np.sqrt((2 * annual_demand * order_cost) / holding_cost_per_unit)
 daily_demand = annual_demand / 365
 
-# Z-scores for service levels
 z_scores = {
     85: 1.04, 86: 1.08, 87: 1.13, 88: 1.17, 89: 1.23,
     90: 1.28, 91: 1.34, 92: 1.41, 93: 1.48, 94: 1.55,
@@ -296,7 +386,6 @@ safety_stock = z_score * lead_time_demand_std
 average_lead_time_demand = daily_demand * lead_time_days
 reorder_point = average_lead_time_demand + safety_stock
 
-# Derived metrics
 orders_per_year = annual_demand / eoq
 days_between_orders = 365 / orders_per_year
 total_order_cost_annual = orders_per_year * order_cost
@@ -307,7 +396,7 @@ total_inventory_cost_annual = total_order_cost_annual + total_holding_cost_annua
 # Display results
 st.markdown("## 📈 Optimization Results")
 
-# Key metrics in columns
+# Key metrics
 col1, col2, col3, col4 = st.columns(4)
 
 with col1:
@@ -316,7 +405,7 @@ with col1:
         f"{eoq:,.0f}",
         help="Optimal order size that minimizes total cost"
     )
-    st.caption("units per order")
+    st.markdown("<p class='caption'>units per order</p>", unsafe_allow_html=True)
 
 with col2:
     st.metric(
@@ -324,7 +413,7 @@ with col2:
         f"{safety_stock:,.0f}",
         help=f"Buffer for {service_level}% service level"
     )
-    st.caption("units buffer")
+    st.markdown("<p class='caption'>units buffer</p>", unsafe_allow_html=True)
 
 with col3:
     st.metric(
@@ -332,7 +421,7 @@ with col3:
         f"{reorder_point:,.0f}",
         help="Trigger new order at this inventory level"
     )
-    st.caption("units trigger")
+    st.markdown("<p class='caption'>units trigger</p>", unsafe_allow_html=True)
 
 with col4:
     st.metric(
@@ -340,39 +429,39 @@ with col4:
         f"{orders_per_year:.1f}",
         help="Orders needed per year"
     )
-    st.caption("orders/year")
+    st.markdown("<p class='caption'>orders/year</p>", unsafe_allow_html=True)
 
-# Business impact callout
-st.markdown("### 💰 Business Impact")
+# Business impact
+st.markdown("## 💰 Business Impact")
 
-col_impact1, col_impact2, col_impact3 = st.columns(3)
+col_b1, col_b2, col_b3 = st.columns(3)
 
-with col_impact1:
+with col_b1:
     st.metric(
         "Total Annual Cost",
         f"€{total_inventory_cost_annual:,.0f}",
         help="Total inventory management cost"
     )
-    st.caption("ordering + holding")
+    st.markdown("<p class='caption'>ordering + holding</p>", unsafe_allow_html=True)
 
-with col_impact2:
+with col_b2:
     st.metric(
         "Average Inventory",
         f"{average_inventory:,.0f}",
         help="Average units in stock"
     )
-    st.caption("units on hand")
+    st.markdown("<p class='caption'>units on hand</p>", unsafe_allow_html=True)
 
-with col_impact3:
+with col_b3:
     st.metric(
         "Days Between Orders",
         f"{days_between_orders:.0f}",
         help="Ordering cycle length"
     )
-    st.caption("days cycle")
+    st.markdown("<p class='caption'>days cycle</p>", unsafe_allow_html=True)
 
-# Cost breakdown visualization
-st.markdown("### 📊 Cost Breakdown Analysis")
+# Cost breakdown
+st.markdown("## 📊 Cost Breakdown Analysis")
 
 fig_costs = go.Figure()
 
@@ -382,7 +471,8 @@ fig_costs.add_trace(go.Bar(
     y=[total_order_cost_annual],
     marker_color='#0066FF',
     text=[f'€{total_order_cost_annual:,.0f}'],
-    textposition='auto',
+    textposition='inside',
+    textfont=dict(color='white', size=16, family='Arial Black'),
 ))
 
 fig_costs.add_trace(go.Bar(
@@ -391,43 +481,56 @@ fig_costs.add_trace(go.Bar(
     y=[total_holding_cost_annual],
     marker_color='#00B894',
     text=[f'€{total_holding_cost_annual:,.0f}'],
-    textposition='auto',
+    textposition='inside',
+    textfont=dict(color='white', size=16, family='Arial Black'),
 ))
 
 fig_costs.update_layout(
-    title=f'Total Annual Inventory Cost: €{total_inventory_cost_annual:,.0f}',
+    title=dict(
+        text=f'<b>Total Annual Inventory Cost: €{total_inventory_cost_annual:,.0f}</b>',
+        font=dict(size=18, color='#0A2540')
+    ),
     barmode='stack',
-    height=350,
+    height=400,
     showlegend=True,
-    legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
-    font=dict(family="Arial, sans-serif", size=12, color="#0A2540"),
-    plot_bgcolor='rgba(0,0,0,0)',
+    legend=dict(
+        orientation="h",
+        yanchor="bottom",
+        y=1.02,
+        xanchor="right",
+        x=1,
+        font=dict(size=14, color='#0A2540')
+    ),
+    font=dict(family="Arial", size=12, color="#0A2540"),
+    plot_bgcolor='rgba(248,249,250,0.5)',
     paper_bgcolor='rgba(0,0,0,0)',
+    xaxis=dict(showgrid=False),
+    yaxis=dict(showgrid=True, gridcolor='rgba(0,0,0,0.1)')
 )
 
 st.plotly_chart(fig_costs, use_container_width=True)
 
 # Key insights
-col_insight1, col_insight2 = st.columns(2)
+col_i1, col_i2 = st.columns(2)
 
-with col_insight1:
+with col_i1:
     st.info(f"""
-    **Ordering Strategy:**
+    **📦 Ordering Strategy:**
     - Order **{eoq:,.0f} units** every **{days_between_orders:.0f} days**
     - Equals **{orders_per_year:.1f} orders per year**
     - Ordering cost: **€{total_order_cost_annual:,.0f}/year**
     """)
 
-with col_insight2:
+with col_i2:
     st.success(f"""
-    **Inventory Management:**
+    **✅ Inventory Management:**
     - Maintain **{safety_stock:,.0f} units** safety stock
     - Reorder when inventory hits **{reorder_point:,.0f} units**
     - Holding cost: **€{total_holding_cost_annual:,.0f}/year**
     """)
 
 # Inventory simulation
-st.markdown("### 📉 Inventory Level Simulation")
+st.markdown("## 📉 Inventory Level Simulation")
 
 time_points = np.linspace(0, 2 * days_between_orders, 100)
 inventory_levels = []
@@ -457,8 +560,11 @@ fig_sim.add_hline(
     line_dash="dash",
     line_color="#FF6B35",
     line_width=2,
-    annotation_text=f"Reorder Point: {reorder_point:,.0f} units",
-    annotation_position="right"
+    annotation=dict(
+        text=f"<b>Reorder Point: {reorder_point:,.0f} units</b>",
+        font=dict(size=12, color='#FF6B35'),
+        xanchor='left'
+    )
 )
 
 fig_sim.add_hline(
@@ -466,24 +572,32 @@ fig_sim.add_hline(
     line_dash="dot",
     line_color="#DC143C",
     line_width=2,
-    annotation_text=f"Safety Stock: {safety_stock:,.0f} units",
-    annotation_position="right"
+    annotation=dict(
+        text=f"<b>Safety Stock: {safety_stock:,.0f} units</b>",
+        font=dict(size=12, color='#DC143C'),
+        xanchor='left'
+    )
 )
 
 fig_sim.update_layout(
-    title='Inventory Levels Over Time (2 Order Cycles)',
+    title=dict(
+        text='<b>Inventory Levels Over Time (2 Order Cycles)</b>',
+        font=dict(size=18, color='#0A2540')
+    ),
     xaxis_title='Days',
     yaxis_title='Inventory (units)',
     height=400,
     hovermode='x unified',
-    font=dict(family="Arial, sans-serif", size=12, color="#0A2540"),
+    font=dict(family="Arial", size=12, color="#0A2540"),
     plot_bgcolor='rgba(248,249,250,0.5)',
     paper_bgcolor='rgba(0,0,0,0)',
+    xaxis=dict(showgrid=True, gridcolor='rgba(0,0,0,0.1)'),
+    yaxis=dict(showgrid=True, gridcolor='rgba(0,0,0,0.1)')
 )
 
 st.plotly_chart(fig_sim, use_container_width=True)
 
-# Technical details (expandable)
+# Technical details
 with st.expander("🔧 Technical Implementation Details"):
     st.markdown("""
     ### How This Calculator Works
@@ -525,7 +639,7 @@ with st.expander("🔧 Technical Implementation Details"):
     """)
 
 # Scenario comparison
-st.markdown("### 🔄 Scenario Comparison")
+st.markdown("## 🔄 Scenario Comparison")
 
 scenarios_df = pd.DataFrame({
     'Scenario': ['Conservative (99%)', f'Current ({service_level}%)', 'Aggressive (90%)'],
@@ -554,8 +668,8 @@ st.dataframe(
     hide_index=True
 )
 
-# Export functionality
-st.markdown("### 💾 Export Results")
+# Export
+st.markdown("## 💾 Export Results")
 
 export_df = pd.DataFrame({
     'Parameter': [
@@ -586,7 +700,7 @@ st.download_button(
     help="Download all inputs and results as CSV file"
 )
 
-# Author card with personal branding
+# Author card
 st.markdown("---")
 st.markdown("""
     <div class='author-card'>
@@ -609,14 +723,14 @@ st.markdown("""
             production-ready AI solutions. No coding experience required.
         </p>
         <p style='margin-top: 10px;'>
-            <a href='https://dennisschmal.de' target='_blank' style='background-color: white; color: #0066FF; padding: 8px 20px; border-radius: 6px; text-decoration: none; font-weight: 700;'>
+            <a href='https://dennisschmal.de' target='_blank' style='background-color: white; color: #0066FF; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-weight: 700; display: inline-block;'>
                 Learn More →
             </a>
         </p>
     </div>
     """, unsafe_allow_html=True)
 
-# Usage stats and social proof
+# Usage stats
 st.markdown("""
     <div class='built-by'>
         <strong>📊 Tool Usage:</strong> 500+ calculations/month • 
@@ -632,7 +746,7 @@ st.markdown("""
 st.markdown("---")
 st.markdown("""
     <div style='text-align: center; color: #666; padding: 20px; font-size: 13px;'>
-        <p style='margin-bottom: 10px;'>
+        <p style='margin-bottom: 10px; color: #0A2540;'>
             © 2024 Dennis Schmal | Built with Python + Streamlit | 
             <a href='https://github.com/dschmahl/eoq-calculator' target='_blank' style='color: #0066FF;'>View Source Code</a>
         </p>
