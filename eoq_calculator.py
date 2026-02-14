@@ -21,248 +21,376 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS - Fixed for readability in both light and dark modes
+# Enhanced CSS with better dark mode support and professional styling
 st.markdown("""
     <style>
-    /* Main styling */
+    /* Import Google Fonts */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+    
+    /* Global font */
+    * {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    
+    /* Main container */
     .main {
         padding: 0rem 1rem;
     }
     
-    /* Header styling */
+    /* Headers - Enhanced */
     h1 {
         color: #0066FF !important;
-        font-weight: 700;
-        border-bottom: 3px solid #0066FF;
-        padding-bottom: 10px;
+        font-weight: 800 !important;
+        font-size: 48px !important;
+        letter-spacing: -1px;
+        margin-bottom: 8px !important;
     }
     
     h2 {
         color: #0066FF !important;
-        font-weight: 600;
-        margin-top: 30px;
+        font-weight: 700 !important;
+        font-size: 28px !important;
+        margin-top: 40px !important;
+        margin-bottom: 20px !important;
+        padding-bottom: 12px;
+        border-bottom: 2px solid rgba(0, 102, 255, 0.2);
     }
     
     h3 {
         color: #0066FF !important;
-        font-weight: 500;
+        font-weight: 600 !important;
+        font-size: 20px !important;
     }
     
-    /* CRITICAL FIX: Metrics styling with proper contrast */
+    /* Metric cards - Premium styling */
     [data-testid="stMetric"] {
-        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-        padding: 20px;
-        border-radius: 12px;
-        border-left: 4px solid #0066FF;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        background: linear-gradient(135deg, #ffffff 0%, #fafbfc 100%);
+        padding: 24px;
+        border-radius: 16px;
+        border: 1px solid rgba(0, 102, 255, 0.1);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
     }
     
-    /* Metric label - dark text */
+    [data-testid="stMetric"]:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0, 102, 255, 0.15);
+        border-color: rgba(0, 102, 255, 0.3);
+    }
+    
+    /* Metric labels - Clear and bold */
     [data-testid="stMetricLabel"] {
         color: #0A2540 !important;
         font-weight: 600 !important;
-        font-size: 14px !important;
+        font-size: 13px !important;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 8px !important;
     }
     
-    /* Metric value - DARK TEXT for readability */
+    /* Metric values - Large and prominent */
     [data-testid="stMetricValue"] {
         color: #0066FF !important;
-        font-size: 32px !important;
-        font-weight: 700 !important;
+        font-size: 36px !important;
+        font-weight: 800 !important;
+        line-height: 1.2 !important;
     }
     
     /* Metric delta */
     [data-testid="stMetricDelta"] {
         color: #00B894 !important;
+        font-weight: 600 !important;
     }
     
-    /* Caption text below metrics - dark */
+    /* Caption styling */
     .caption {
-        color: #666 !important;
-        font-size: 12px;
-    }
-    
-    /* Sidebar styling */
-    section[data-testid="stSidebar"] {
-        background-color: #f8f9fa;
-    }
-    
-    section[data-testid="stSidebar"] h2 {
-        color: #0A2540 !important;
-    }
-    
-    section[data-testid="stSidebar"] label {
-        color: #0A2540 !important;
+        color: #6B7280 !important;
+        font-size: 12px !important;
         font-weight: 500;
+        margin-top: 4px;
     }
     
-    /* Info boxes - better contrast */
-    .stAlert {
-        border-radius: 10px;
-        border-left: 4px solid #0066FF;
+    /* Section dividers */
+    .section-divider {
+        height: 2px;
+        background: linear-gradient(90deg, rgba(0,102,255,0) 0%, rgba(0,102,255,0.3) 50%, rgba(0,102,255,0) 100%);
+        margin: 40px 0;
     }
     
+    /* Info boxes - Enhanced */
     [data-baseweb="notification"] {
-        background-color: #e3f2fd;
+        background: linear-gradient(135deg, #EBF5FF 0%, #E0F2FE 100%);
         border-left: 4px solid #0066FF;
+        border-radius: 12px;
+        padding: 16px 20px;
+        box-shadow: 0 2px 8px rgba(0, 102, 255, 0.1);
     }
     
     [data-baseweb="notification"] p {
         color: #0A2540 !important;
+        line-height: 1.6;
+        font-size: 14px;
     }
     
     /* Success boxes */
     .element-container div[data-baseweb="notification"][kind="success"] {
-        background-color: #e8f5e9;
+        background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%);
         border-left: 4px solid #00B894;
     }
     
-    /* Buttons */
+    /* Sidebar styling */
+    section[data-testid="stSidebar"] {
+        background-color: #0A2540;
+    }
+    
+    section[data-testid="stSidebar"] h2 {
+        color: #FFFFFF !important;
+        border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    section[data-testid="stSidebar"] label {
+        color: #E0E7FF !important;
+        font-weight: 500;
+    }
+    
+    section[data-testid="stSidebar"] [data-baseweb="select"] {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    /* Buttons - Enhanced */
     .stButton > button {
-        background-color: #0066FF;
+        background: linear-gradient(135deg, #0066FF 0%, #0052CC 100%);
         color: white !important;
         font-weight: 600;
-        border-radius: 8px;
+        border-radius: 10px;
         border: none;
-        padding: 10px 24px;
+        padding: 12px 28px;
+        font-size: 14px;
+        letter-spacing: 0.3px;
         transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(0, 102, 255, 0.3);
     }
     
     .stButton > button:hover {
-        background-color: #0052CC;
-        box-shadow: 0 4px 8px rgba(0,102,255,0.3);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0, 102, 255, 0.4);
+        background: linear-gradient(135deg, #0052CC 0%, #0041A8 100%);
     }
     
     /* Download button */
     .stDownloadButton > button {
-        background-color: #00B894;
+        background: linear-gradient(135deg, #00B894 0%, #009874 100%);
         color: white !important;
         font-weight: 600;
+        border-radius: 10px;
+        padding: 12px 28px;
+        box-shadow: 0 4px 12px rgba(0, 184, 148, 0.3);
     }
     
     .stDownloadButton > button:hover {
-        background-color: #009874;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0, 184, 148, 0.4);
     }
     
-    /* Tech badge */
+    /* Tech badges */
     .tech-badge {
         display: inline-block;
-        background-color: #0A2540;
+        background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
         color: white;
-        padding: 6px 14px;
-        border-radius: 20px;
+        padding: 8px 16px;
+        border-radius: 24px;
         font-size: 13px;
         font-weight: 600;
-        margin: 3px;
+        margin: 4px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        transition: all 0.3s ease;
     }
     
-    /* Author card */
+    .tech-badge:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    }
+    
+    /* Author card - Premium gradient */
     .author-card {
         background: linear-gradient(135deg, #0A2540 0%, #0066FF 100%);
         color: white;
-        padding: 25px;
-        border-radius: 12px;
-        margin: 20px 0;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        padding: 32px;
+        border-radius: 16px;
+        margin: 40px 0;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .author-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.05) 50%, transparent 70%);
+        pointer-events: none;
     }
     
     .author-card h3 {
         color: white !important;
-        margin-bottom: 10px;
+        margin-bottom: 12px;
+        font-size: 24px !important;
     }
     
     .author-card p {
-        color: rgba(255,255,255,0.95);
-        margin: 8px 0;
-        line-height: 1.6;
+        color: rgba(255, 255, 255, 0.95);
+        margin: 10px 0;
+        line-height: 1.7;
+        font-size: 15px;
     }
     
     .author-card a {
         color: #FFD700;
         text-decoration: none;
         font-weight: 600;
+        transition: all 0.2s ease;
     }
     
     .author-card a:hover {
+        color: #FFC700;
         text-decoration: underline;
     }
     
-    /* Built by badge */
-    .built-by {
-        background-color: #f8f9fa;
-        border-left: 4px solid #0066FF;
-        padding: 15px;
-        border-radius: 8px;
+    /* Stats card */
+    .stats-card {
+        background: linear-gradient(135deg, #F8FAFC 0%, #F1F5F9 100%);
+        border: 1px solid rgba(0, 102, 255, 0.1);
+        padding: 20px;
+        border-radius: 12px;
         margin: 20px 0;
         color: #0A2540;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     }
     
-    /* Deployment info */
+    .stats-card strong {
+        color: #0066FF;
+        font-weight: 700;
+    }
+    
+    /* Deployment info box */
     .deploy-info {
-        background-color: #e3f2fd;
-        border: 1px solid #0066FF;
-        border-radius: 8px;
-        padding: 12px;
-        margin: 10px 0;
-        font-size: 13px;
-        color: #0A2540 !important;
+        background: linear-gradient(135deg, rgba(0, 102, 255, 0.1) 0%, rgba(0, 102, 255, 0.05) 100%);
+        border: 1px solid rgba(0, 102, 255, 0.2);
+        border-radius: 12px;
+        padding: 16px;
+        margin: 12px 0;
+        color: #E0E7FF !important;
     }
     
     .deploy-info strong {
-        color: #0066FF;
-    }
-    
-    /* Expander */
-    .streamlit-expanderHeader {
-        background-color: #f8f9fa;
-        color: #0A2540 !important;
-        font-weight: 600;
+        color: #FFFFFF;
+        font-weight: 700;
     }
     
     /* Tables */
     .dataframe {
         font-size: 14px;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     }
     
     .dataframe th {
-        background-color: #0066FF !important;
+        background: linear-gradient(135deg, #0066FF 0%, #0052CC 100%) !important;
         color: white !important;
-        font-weight: 600;
+        font-weight: 700 !important;
+        padding: 16px !important;
+        text-transform: uppercase;
+        font-size: 12px;
+        letter-spacing: 0.5px;
     }
     
     .dataframe td {
         color: #0A2540 !important;
+        padding: 14px !important;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    .dataframe tr:hover td {
+        background-color: rgba(0, 102, 255, 0.02);
+    }
+    
+    /* Expander */
+    .streamlit-expanderHeader {
+        background: linear-gradient(135deg, #F8FAFC 0%, #F1F5F9 100%);
+        color: #0A2540 !important;
+        font-weight: 600;
+        border-radius: 12px;
+        padding: 16px;
+        border: 1px solid rgba(0, 102, 255, 0.1);
+    }
+    
+    .streamlit-expanderHeader:hover {
+        background: linear-gradient(135deg, #EBF5FF 0%, #E0F2FE 100%);
+        border-color: rgba(0, 102, 255, 0.3);
     }
     
     /* Code blocks */
     code {
-        background-color: #f8f9fa;
+        background-color: #F1F5F9;
         color: #0066FF;
-        padding: 2px 6px;
-        border-radius: 4px;
+        padding: 3px 8px;
+        border-radius: 6px;
+        font-size: 13px;
+        font-weight: 500;
     }
     
     pre {
-        background-color: #f8f9fa;
-        border-left: 3px solid #0066FF;
-        padding: 12px;
-        border-radius: 6px;
+        background-color: #0F172A;
+        border-left: 4px solid #0066FF;
+        padding: 16px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
     
     pre code {
-        color: #0A2540;
+        color: #E0E7FF;
+        background: transparent;
+    }
+    
+    /* Emoji icons for sections */
+    .section-icon {
+        font-size: 28px;
+        margin-right: 12px;
+        vertical-align: middle;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        h1 {
+            font-size: 36px !important;
+        }
+        
+        h2 {
+            font-size: 24px !important;
+        }
+        
+        [data-testid="stMetricValue"] {
+            font-size: 28px !important;
+        }
     }
     </style>
     """, unsafe_allow_html=True)
 
-# Header with personal branding
+# Enhanced header
 st.markdown("""
-    <div style='text-align: center; padding: 20px 0;'>
-        <h1 style='font-size: 42px; margin-bottom: 5px;'>📦 EOQ Calculator</h1>
-        <p style='font-size: 18px; color: #0066FF; margin-bottom: 5px; font-weight: 600;'>
-            Built by Dennis Schmal | Supply Chain Digitalization Manager
+    <div style='text-align: center; padding: 30px 0 20px 0;'>
+        <h1 style='margin-bottom: 12px;'>📦 EOQ Calculator</h1>
+        <p style='font-size: 20px; color: #0066FF; margin-bottom: 8px; font-weight: 700;'>
+            Built by Dennis Schmal
         </p>
-        <p style='font-size: 14px; color: #666;'>
+        <p style='font-size: 16px; color: #6B7280; font-weight: 500;'>
+            Supply Chain Digitalization Manager | AI Solutions Builder
+        </p>
+        <p style='font-size: 14px; color: #9CA3AF; margin-top: 8px;'>
             Optimize inventory decisions with data-driven calculations
         </p>
     </div>
@@ -270,23 +398,24 @@ st.markdown("""
 
 # Tech stack badges
 st.markdown("""
-    <div style='text-align: center; margin-bottom: 20px;'>
-        <span class='tech-badge'>Python</span>
-        <span class='tech-badge'>Streamlit</span>
-        <span class='tech-badge'>Plotly</span>
-        <span class='tech-badge'>NumPy</span>
-        <span class='tech-badge'>Pandas</span>
+    <div style='text-align: center; margin-bottom: 30px;'>
+        <span class='tech-badge'>🐍 Python</span>
+        <span class='tech-badge'>⚡ Streamlit</span>
+        <span class='tech-badge'>📊 Plotly</span>
+        <span class='tech-badge'>🔢 NumPy</span>
+        <span class='tech-badge'>🐼 Pandas</span>
     </div>
     """, unsafe_allow_html=True)
 
-# Quick intro box
+# Intro box
 st.info("""
-💡 **What this tool does:** Calculate optimal order quantities, safety stock levels, and reorder points 
-to minimize inventory costs while maintaining service levels. Built in 2 hours, deployed to production, 
-saving companies thousands in inventory carrying costs.
+**💡 What this tool does:** Calculate optimal order quantities, safety stock levels, and reorder points 
+to minimize inventory costs while maintaining service levels.
+
+**⚡ Built in 2 hours** • **🚀 Deployed to production** • **💰 Saving companies thousands** in inventory carrying costs
 """)
 
-# Sidebar inputs
+# Sidebar
 st.sidebar.markdown("## 🎯 Input Parameters")
 
 with st.sidebar.expander("📊 Demand & Costs", expanded=True):
@@ -323,7 +452,7 @@ with st.sidebar.expander("📊 Demand & Costs", expanded=True):
         max_value=50,
         value=20,
         step=1,
-        help="Annual cost to store one unit (warehousing, insurance, obsolescence, capital cost)"
+        help="Annual cost to store one unit"
     )
 
 with st.sidebar.expander("⏱️ Lead Time & Service", expanded=True):
@@ -342,7 +471,7 @@ with st.sidebar.expander("⏱️ Lead Time & Service", expanded=True):
         max_value=99,
         value=95,
         step=1,
-        help="Probability of NOT having a stockout (95% = 1 stockout per 20 cycles)"
+        help="Probability of NOT having a stockout"
     )
     
     demand_variability = st.slider(
@@ -351,15 +480,14 @@ with st.sidebar.expander("⏱️ Lead Time & Service", expanded=True):
         max_value=50,
         value=20,
         step=5,
-        help="Coefficient of Variation: How much demand fluctuates (StdDev/Mean × 100)"
+        help="How much demand fluctuates"
     )
 
-# Deployment info in sidebar
 st.sidebar.markdown("---")
 st.sidebar.markdown("""
     <div class='deploy-info'>
         <strong>⚡ Live Production Tool</strong><br>
-        <span style='color: #0A2540;'>
+        <span style='color: #E0E7FF;'>
         Built: 2024<br>
         Tech: Python + Streamlit<br>
         Hosted: Streamlit Cloud<br>
@@ -368,7 +496,7 @@ st.sidebar.markdown("""
     </div>
     """, unsafe_allow_html=True)
 
-# Core calculations
+# Calculations
 holding_cost_per_unit = unit_cost * (holding_cost_pct / 100)
 eoq = np.sqrt((2 * annual_demand * order_cost) / holding_cost_per_unit)
 daily_demand = annual_demand / 365
@@ -393,10 +521,9 @@ average_inventory = (eoq / 2) + safety_stock
 total_holding_cost_annual = average_inventory * holding_cost_per_unit
 total_inventory_cost_annual = total_order_cost_annual + total_holding_cost_annual
 
-# Display results
-st.markdown("## 📈 Optimization Results")
+# Results section
+st.markdown("<h2><span class='section-icon'>📈</span>Optimization Results</h2>", unsafe_allow_html=True)
 
-# Key metrics
 col1, col2, col3, col4 = st.columns(4)
 
 with col1:
@@ -431,8 +558,11 @@ with col4:
     )
     st.markdown("<p class='caption'>orders/year</p>", unsafe_allow_html=True)
 
-# Business impact
-st.markdown("## 💰 Business Impact")
+# Divider
+st.markdown("<div class='section-divider'></div>", unsafe_allow_html=True)
+
+# Business Impact
+st.markdown("<h2><span class='section-icon'>💰</span>Business Impact</h2>", unsafe_allow_html=True)
 
 col_b1, col_b2, col_b3 = st.columns(3)
 
@@ -460,8 +590,11 @@ with col_b3:
     )
     st.markdown("<p class='caption'>days cycle</p>", unsafe_allow_html=True)
 
-# Cost breakdown
-st.markdown("## 📊 Cost Breakdown Analysis")
+# Divider
+st.markdown("<div class='section-divider'></div>", unsafe_allow_html=True)
+
+# Enhanced Cost Breakdown
+st.markdown("<h2><span class='section-icon'>📊</span>Cost Breakdown Analysis</h2>", unsafe_allow_html=True)
 
 fig_costs = go.Figure()
 
@@ -469,68 +602,95 @@ fig_costs.add_trace(go.Bar(
     name='Ordering Costs',
     x=['Annual Costs'],
     y=[total_order_cost_annual],
-    marker_color='#0066FF',
+    marker=dict(
+        color='#0066FF',
+        line=dict(color='#0052CC', width=2)
+    ),
     text=[f'€{total_order_cost_annual:,.0f}'],
     textposition='inside',
-    textfont=dict(color='white', size=16, family='Arial Black'),
+    textfont=dict(color='white', size=18, family='Inter', weight=700),
+    hovertemplate='<b>Ordering Costs</b><br>€%{y:,.0f}<extra></extra>'
 ))
 
 fig_costs.add_trace(go.Bar(
     name='Holding Costs',
     x=['Annual Costs'],
     y=[total_holding_cost_annual],
-    marker_color='#00B894',
+    marker=dict(
+        color='#00B894',
+        line=dict(color='#009874', width=2)
+    ),
     text=[f'€{total_holding_cost_annual:,.0f}'],
     textposition='inside',
-    textfont=dict(color='white', size=16, family='Arial Black'),
+    textfont=dict(color='white', size=18, family='Inter', weight=700),
+    hovertemplate='<b>Holding Costs</b><br>€%{y:,.0f}<extra></extra>'
 ))
 
 fig_costs.update_layout(
     title=dict(
         text=f'<b>Total Annual Inventory Cost: €{total_inventory_cost_annual:,.0f}</b>',
-        font=dict(size=18, color='#0A2540')
+        font=dict(size=22, color='#0066FF', family='Inter', weight=800),
+        x=0.5,
+        xanchor='center'
     ),
     barmode='stack',
-    height=400,
+    height=450,
     showlegend=True,
     legend=dict(
         orientation="h",
         yanchor="bottom",
-        y=1.02,
-        xanchor="right",
-        x=1,
-        font=dict(size=14, color='#0A2540')
+        y=1.05,
+        xanchor="center",
+        x=0.5,
+        font=dict(size=14, color='#0A2540', family='Inter', weight=600),
+        bgcolor='rgba(255,255,255,0.9)',
+        bordercolor='rgba(0,102,255,0.2)',
+        borderwidth=1
     ),
-    font=dict(family="Arial", size=12, color="#0A2540"),
-    plot_bgcolor='rgba(248,249,250,0.5)',
+    font=dict(family="Inter", size=13, color="#0A2540"),
+    plot_bgcolor='rgba(0,0,0,0)',
     paper_bgcolor='rgba(0,0,0,0)',
-    xaxis=dict(showgrid=False),
-    yaxis=dict(showgrid=True, gridcolor='rgba(0,0,0,0.1)')
+    xaxis=dict(
+        showgrid=False,
+        showticklabels=False,
+        zeroline=False
+    ),
+    yaxis=dict(
+        showgrid=True,
+        gridcolor='rgba(0,0,0,0.05)',
+        gridwidth=1,
+        title='Cost (€)',
+        title_font=dict(size=14, color='#6B7280', family='Inter', weight=600)
+    ),
+    margin=dict(l=60, r=40, t=100, b=40)
 )
 
 st.plotly_chart(fig_costs, use_container_width=True)
 
-# Key insights
+# Insights
 col_i1, col_i2 = st.columns(2)
 
 with col_i1:
     st.info(f"""
-    **📦 Ordering Strategy:**
-    - Order **{eoq:,.0f} units** every **{days_between_orders:.0f} days**
-    - Equals **{orders_per_year:.1f} orders per year**
-    - Ordering cost: **€{total_order_cost_annual:,.0f}/year**
+**📦 Ordering Strategy:**
+- Order **{eoq:,.0f} units** every **{days_between_orders:.0f} days**
+- Equals **{orders_per_year:.1f} orders per year**
+- Ordering cost: **€{total_order_cost_annual:,.0f}/year**
     """)
 
 with col_i2:
     st.success(f"""
-    **✅ Inventory Management:**
-    - Maintain **{safety_stock:,.0f} units** safety stock
-    - Reorder when inventory hits **{reorder_point:,.0f} units**
-    - Holding cost: **€{total_holding_cost_annual:,.0f}/year**
+**✅ Inventory Management:**
+- Maintain **{safety_stock:,.0f} units** safety stock
+- Reorder when inventory hits **{reorder_point:,.0f} units**
+- Holding cost: **€{total_holding_cost_annual:,.0f}/year**
     """)
 
-# Inventory simulation
-st.markdown("## 📉 Inventory Level Simulation")
+# Divider
+st.markdown("<div class='section-divider'></div>", unsafe_allow_html=True)
+
+# Enhanced Inventory Simulation
+st.markdown("<h2><span class='section-icon'>📉</span>Inventory Level Simulation</h2>", unsafe_allow_html=True)
 
 time_points = np.linspace(0, 2 * days_between_orders, 100)
 inventory_levels = []
@@ -545,60 +705,85 @@ for t in time_points:
 
 fig_sim = go.Figure()
 
+# Main inventory line
 fig_sim.add_trace(go.Scatter(
     x=time_points,
     y=inventory_levels,
     mode='lines',
     name='Inventory Level',
-    line=dict(color='#0066FF', width=3),
+    line=dict(color='#0066FF', width=4),
     fill='tozeroy',
-    fillcolor='rgba(0, 102, 255, 0.1)'
+    fillcolor='rgba(0, 102, 255, 0.08)',
+    hovertemplate='<b>Day %{x:.0f}</b><br>Inventory: %{y:,.0f} units<extra></extra>'
 ))
 
+# Reorder point line
 fig_sim.add_hline(
     y=reorder_point,
     line_dash="dash",
     line_color="#FF6B35",
-    line_width=2,
+    line_width=3,
     annotation=dict(
-        text=f"<b>Reorder Point: {reorder_point:,.0f} units</b>",
-        font=dict(size=12, color='#FF6B35'),
-        xanchor='left'
+        text=f"<b>📍 Reorder Point: {reorder_point:,.0f} units</b>",
+        font=dict(size=13, color='#FF6B35', family='Inter', weight=700),
+        xanchor='left',
+        bgcolor='rgba(255,255,255,0.9)',
+        bordercolor='#FF6B35',
+        borderwidth=2,
+        borderpad=8
     )
 )
 
+# Safety stock line
 fig_sim.add_hline(
     y=safety_stock,
     line_dash="dot",
     line_color="#DC143C",
-    line_width=2,
+    line_width=3,
     annotation=dict(
-        text=f"<b>Safety Stock: {safety_stock:,.0f} units</b>",
-        font=dict(size=12, color='#DC143C'),
-        xanchor='left'
+        text=f"<b>🛡️ Safety Stock: {safety_stock:,.0f} units</b>",
+        font=dict(size=13, color='#DC143C', family='Inter', weight=700),
+        xanchor='left',
+        bgcolor='rgba(255,255,255,0.9)',
+        bordercolor='#DC143C',
+        borderwidth=2,
+        borderpad=8
     )
 )
 
 fig_sim.update_layout(
     title=dict(
         text='<b>Inventory Levels Over Time (2 Order Cycles)</b>',
-        font=dict(size=18, color='#0A2540')
+        font=dict(size=22, color='#0066FF', family='Inter', weight=800),
+        x=0.5,
+        xanchor='center'
     ),
-    xaxis_title='Days',
-    yaxis_title='Inventory (units)',
-    height=400,
+    xaxis_title='<b>Days</b>',
+    yaxis_title='<b>Inventory (units)</b>',
+    height=500,
     hovermode='x unified',
-    font=dict(family="Arial", size=12, color="#0A2540"),
-    plot_bgcolor='rgba(248,249,250,0.5)',
+    font=dict(family="Inter", size=13, color="#0A2540"),
+    plot_bgcolor='rgba(248,249,250,0.3)',
     paper_bgcolor='rgba(0,0,0,0)',
-    xaxis=dict(showgrid=True, gridcolor='rgba(0,0,0,0.1)'),
-    yaxis=dict(showgrid=True, gridcolor='rgba(0,0,0,0.1)')
+    xaxis=dict(
+        showgrid=True,
+        gridcolor='rgba(0,0,0,0.05)',
+        gridwidth=1,
+        title_font=dict(size=14, color='#6B7280', family='Inter', weight=600)
+    ),
+    yaxis=dict(
+        showgrid=True,
+        gridcolor='rgba(0,0,0,0.05)',
+        gridwidth=1,
+        title_font=dict(size=14, color='#6B7280', family='Inter', weight=600)
+    ),
+    margin=dict(l=60, r=40, t=100, b=60)
 )
 
 st.plotly_chart(fig_sim, use_container_width=True)
 
 # Technical details
-with st.expander("🔧 Technical Implementation Details"):
+with st.expander("🔧 **Technical Implementation Details**"):
     st.markdown("""
     ### How This Calculator Works
     
@@ -638,11 +823,14 @@ with st.expander("🔧 Technical Implementation Details"):
     **Code:** [View on GitHub](https://github.com/dschmahl) | **Clone:** `git clone repo-url`
     """)
 
+# Divider
+st.markdown("<div class='section-divider'></div>", unsafe_allow_html=True)
+
 # Scenario comparison
-st.markdown("## 🔄 Scenario Comparison")
+st.markdown("<h2><span class='section-icon'>🔄</span>Scenario Comparison</h2>", unsafe_allow_html=True)
 
 scenarios_df = pd.DataFrame({
-    'Scenario': ['Conservative (99%)', f'Current ({service_level}%)', 'Aggressive (90%)'],
+    'Scenario': ['🎯 Conservative (99%)', f'⚡ Current ({service_level}%)', '🚀 Aggressive (90%)'],
     'Service Level': ['99%', f'{service_level}%', '90%'],
     'Safety Stock': [
         f"{z_scores[99] * lead_time_demand_std:,.0f}",
@@ -668,8 +856,11 @@ st.dataframe(
     hide_index=True
 )
 
+# Divider
+st.markdown("<div class='section-divider'></div>", unsafe_allow_html=True)
+
 # Export
-st.markdown("## 💾 Export Results")
+st.markdown("<h2><span class='section-icon'>💾</span>Export Results</h2>", unsafe_allow_html=True)
 
 export_df = pd.DataFrame({
     'Parameter': [
@@ -700,39 +891,41 @@ st.download_button(
     help="Download all inputs and results as CSV file"
 )
 
+# Divider
+st.markdown("<div class='section-divider'></div>", unsafe_allow_html=True)
+
 # Author card
-st.markdown("---")
 st.markdown("""
     <div class='author-card'>
         <h3>👨‍💻 Built by Dennis Schmal</h3>
-        <p><strong>Supply Chain Digitalization Manager | AI Solutions Builder</strong></p>
-        <p style='margin-top: 15px;'>
+        <p style='font-size: 16px;'><strong>Supply Chain Digitalization Manager | AI Solutions Builder</strong></p>
+        <p style='margin-top: 20px; font-size: 15px;'>
             I build production-ready AI solutions for supply chain operations by day. 
             I teach supply chain professionals to build the same solutions on weekends.
         </p>
-        <p style='margin-top: 15px;'>
+        <p style='margin-top: 20px; font-size: 15px;'>
             <strong>🔗 Connect:</strong> 
             <a href='https://dennisschmal.de' target='_blank'>Website</a> • 
             <a href='https://linkedin.com/in/dennis-schmal' target='_blank'>LinkedIn</a> • 
             <a href='https://github.com/dschmahl' target='_blank'>GitHub</a> • 
             <a href='https://youtube.com/@dennisschmal' target='_blank'>YouTube</a>
         </p>
-        <p style='margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.2);'>
+        <p style='margin-top: 24px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.2); font-size: 15px;'>
             <strong>🎓 Want to build tools like this?</strong><br>
             Join my 8-week weekend cohorts where supply chain professionals learn to build 
             production-ready AI solutions. No coding experience required.
         </p>
-        <p style='margin-top: 10px;'>
-            <a href='https://dennisschmal.de' target='_blank' style='background-color: white; color: #0066FF; padding: 10px 24px; border-radius: 6px; text-decoration: none; font-weight: 700; display: inline-block;'>
+        <p style='margin-top: 16px;'>
+            <a href='https://dennisschmal.de' target='_blank' style='background-color: white; color: #0066FF; padding: 12px 28px; border-radius: 10px; text-decoration: none; font-weight: 700; display: inline-block; box-shadow: 0 4px 12px rgba(0,0,0,0.2); transition: all 0.3s ease;'>
                 Learn More →
             </a>
         </p>
     </div>
     """, unsafe_allow_html=True)
 
-# Usage stats
+# Stats card
 st.markdown("""
-    <div class='built-by'>
+    <div class='stats-card'>
         <strong>📊 Tool Usage:</strong> 500+ calculations/month • 
         <strong>⭐ Built in:</strong> 2 hours • 
         <strong>💾 Code:</strong> Open source • 
@@ -745,12 +938,12 @@ st.markdown("""
 # Footer
 st.markdown("---")
 st.markdown("""
-    <div style='text-align: center; color: #666; padding: 20px; font-size: 13px;'>
-        <p style='margin-bottom: 10px; color: #0A2540;'>
+    <div style='text-align: center; color: #6B7280; padding: 24px; font-size: 13px;'>
+        <p style='margin-bottom: 12px; color: #0A2540; font-weight: 600;'>
             © 2024 Dennis Schmal | Built with Python + Streamlit | 
-            <a href='https://github.com/dschmahl/eoq-calculator' target='_blank' style='color: #0066FF;'>View Source Code</a>
+            <a href='https://github.com/dschmahl/eoq-calculator' target='_blank' style='color: #0066FF; font-weight: 600;'>View Source Code</a>
         </p>
-        <p style='font-size: 11px; color: #999;'>
+        <p style='font-size: 12px; color: #9CA3AF;'>
             This tool is provided as-is for educational purposes. 
             Always validate results with your organization's specific requirements.
         </p>
