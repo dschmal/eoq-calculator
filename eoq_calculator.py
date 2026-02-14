@@ -488,8 +488,8 @@ st.markdown("""
     <p><strong>Built by Dennis Schmal</strong> | Supply Chain Digitalization Manager</p>
     <p>
         <a href='https://dennisschmal.de' target='_blank'>Website</a> • 
-        <a href='https://linkedin.com/in/your-profile' target='_blank'>LinkedIn</a> • 
-        <a href='https://github.com/your-username' target='_blank'>GitHub</a>
+        <a href='https://www.linkedin.com/in/dennis-schmal/' target='_blank'>LinkedIn</a> • 
+        <a href='https://github.com/dschmal' target='_blank'>GitHub</a>
     </p>
     <p style='font-size: 14px; margin-top: 10px;'>
         Want to learn to build tools like this? 
