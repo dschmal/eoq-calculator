@@ -17,23 +17,22 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Optimized CSS for Streamlit rendering
+# Dark theme CSS - matching stock peer analysis style
 st.markdown("""
     <style>
-    /* Main background */
+    /* Dark theme - matching reference */
     .main {
-        background-color: #F8F9FA;
+        background-color: #0E1117;
     }
     
-    /* Remove default padding */
     .block-container {
         padding-top: 2rem;
         padding-bottom: 2rem;
     }
     
-    /* Headers - Clean and simple */
+    /* Headers - white text */
     h1, h2, h3 {
-        color: #1A202C !important;
+        color: #FFFFFF !important;
         font-weight: 600 !important;
     }
     
@@ -45,133 +44,155 @@ st.markdown("""
     h2 {
         font-size: 18px !important;
         margin-top: 2rem !important;
-        margin-bottom: 1rem !important;
+        margin-bottom: 1.5rem !important;
     }
     
-    /* Metric cards */
+    /* Subtitle text */
+    .subtitle {
+        color: #A0AEC0;
+        font-size: 14px;
+        margin-bottom: 2rem;
+    }
+    
+    /* Metric cards - dark theme */
     [data-testid="stMetric"] {
-        background: white;
+        background-color: #1A202C;
         padding: 1.2rem;
         border-radius: 8px;
-        border: 1px solid #E2E8F0;
-        box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        border: 1px solid #2D3748;
     }
     
     [data-testid="stMetricLabel"] {
-        color: #718096 !important;
+        color: #A0AEC0 !important;
         font-size: 12px !important;
-        font-weight: 600 !important;
+        font-weight: 500 !important;
         text-transform: uppercase;
-        letter-spacing: 0.5px;
     }
     
     [data-testid="stMetricValue"] {
-        color: #2C5282 !important;
+        color: #FFFFFF !important;
         font-size: 28px !important;
         font-weight: 700 !important;
     }
     
-    /* Sidebar - FIXED for readability */
+    /* Captions */
+    .stCaptionContainer p, [data-testid="stCaptionContainer"] p {
+        color: #718096 !important;
+        font-size: 12px !important;
+    }
+    
+    /* Sidebar - dark */
     section[data-testid="stSidebar"] {
-        background-color: #FFFFFF !important;
-        padding: 2rem 1rem !important;
+        background-color: #1A202C;
     }
     
     section[data-testid="stSidebar"] > div {
-        background-color: #FFFFFF !important;
+        background-color: #1A202C;
     }
     
-    /* Sidebar text - HIGH CONTRAST */
-    section[data-testid="stSidebar"] label {
-        color: #2D3748 !important;
-        font-weight: 600 !important;
-        font-size: 13px !important;
-        margin-bottom: 0.5rem !important;
-    }
-    
-    section[data-testid="stSidebar"] .stMarkdown {
-        color: #2D3748 !important;
-    }
-    
+    /* Sidebar text - white/light gray */
     section[data-testid="stSidebar"] h2 {
-        color: #1A202C !important;
+        color: #FFFFFF !important;
         font-size: 16px !important;
-        font-weight: 700 !important;
         margin-bottom: 1.5rem !important;
         padding-bottom: 0.5rem !important;
-        border-bottom: 2px solid #E2E8F0 !important;
+        border-bottom: 1px solid #2D3748 !important;
     }
     
-    /* Number inputs in sidebar */
+    section[data-testid="stSidebar"] h3 {
+        color: #E2E8F0 !important;
+        font-size: 14px !important;
+        margin-top: 1.5rem !important;
+        margin-bottom: 1rem !important;
+    }
+    
+    section[data-testid="stSidebar"] label {
+        color: #E2E8F0 !important;
+        font-weight: 500 !important;
+        font-size: 13px !important;
+    }
+    
     section[data-testid="stSidebar"] input {
-        color: #1A202C !important;
-        font-weight: 600 !important;
+        background-color: #2D3748 !important;
+        color: #FFFFFF !important;
+        border: 1px solid #4A5568 !important;
     }
     
-    /* Slider in sidebar */
     section[data-testid="stSidebar"] [data-baseweb="slider"] {
-        margin-top: 1rem !important;
+        margin-top: 0.5rem !important;
     }
     
-    /* Expander in sidebar */
-    section[data-testid="stSidebar"] .streamlit-expanderHeader {
-        background-color: #F7FAFC !important;
-        color: #2D3748 !important;
-        font-weight: 600 !important;
-        border: 1px solid #E2E8F0 !important;
-        border-radius: 6px !important;
+    /* Pills/badges - like stock tickers */
+    .metric-pill {
+        display: inline-block;
+        background-color: #2B6CB0;
+        color: white;
+        padding: 0.4rem 0.9rem;
+        border-radius: 16px;
+        font-size: 12px;
+        font-weight: 600;
+        margin: 0.25rem;
     }
     
-    section[data-testid="stSidebar"] .streamlit-expanderHeader:hover {
-        background-color: #EDF2F7 !important;
+    .info-pill {
+        display: inline-block;
+        background-color: #2D3748;
+        color: #A0AEC0;
+        padding: 0.4rem 0.8rem;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: 500;
+        margin: 0.25rem;
     }
     
-    /* Info boxes */
+    /* Info/Success boxes - dark theme */
     .stAlert {
-        background-color: #EBF8FF !important;
+        background-color: #1A365D !important;
         border-left: 4px solid #3182CE !important;
         border-radius: 6px !important;
-        padding: 1rem !important;
     }
     
     [data-baseweb="notification"] p {
-        color: #2C5282 !important;
-        font-size: 14px !important;
+        color: #90CDF4 !important;
     }
     
-    /* Success boxes */
     .element-container div[kind="success"] {
-        background-color: #F0FFF4 !important;
+        background-color: #1C4532 !important;
         border-left: 4px solid #38A169 !important;
     }
     
     .element-container div[kind="success"] p {
-        color: #22543D !important;
+        color: #9AE6B4 !important;
     }
     
-    /* Tables */
+    /* Tables - dark theme */
     .dataframe {
-        font-size: 13px !important;
+        background-color: #1A202C !important;
+        color: #E2E8F0 !important;
     }
     
     .dataframe th {
-        background-color: #F7FAFC !important;
-        color: #4A5568 !important;
+        background-color: #2D3748 !important;
+        color: #E2E8F0 !important;
         font-weight: 600 !important;
-        text-align: left !important;
     }
     
     .dataframe td {
-        color: #2D3748 !important;
+        background-color: #1A202C !important;
+        color: #E2E8F0 !important;
+        border-bottom: 1px solid #2D3748 !important;
     }
     
-    /* Buttons */
+    .dataframe tr:hover td {
+        background-color: #2D3748 !important;
+    }
+    
+    /* Buttons - dark theme */
     .stButton > button {
         background-color: #3182CE !important;
         color: white !important;
         border: none !important;
         border-radius: 6px !important;
-        padding: 0.5rem 1.5rem !important;
         font-weight: 600 !important;
     }
     
@@ -184,7 +205,6 @@ st.markdown("""
         color: white !important;
         border: none !important;
         border-radius: 6px !important;
-        padding: 0.5rem 1.5rem !important;
         font-weight: 600 !important;
     }
     
@@ -192,51 +212,34 @@ st.markdown("""
         background-color: #2F855A !important;
     }
     
-    /* Remove extra spacing */
-    .element-container {
-        margin-bottom: 1rem !important;
+    /* Expander - dark theme */
+    .streamlit-expanderHeader {
+        background-color: #1A202C !important;
+        color: #E2E8F0 !important;
+        border: 1px solid #2D3748 !important;
     }
     
-    /* Custom cards */
-    .info-card {
-        background: white;
-        padding: 1.5rem;
-        border-radius: 8px;
-        border: 1px solid #E2E8F0;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-        margin-bottom: 1.5rem;
-    }
-    
-    .stat-badge {
-        display: inline-block;
-        background: #EDF2F7;
-        color: #4A5568;
-        padding: 0.4rem 0.8rem;
-        border-radius: 4px;
-        font-size: 12px;
-        font-weight: 600;
-        margin: 0.25rem;
+    .streamlit-expanderHeader:hover {
+        background-color: #2D3748 !important;
     }
     </style>
     """, unsafe_allow_html=True)
 
 # Header
 st.markdown("# 📦 EOQ Calculator")
-st.markdown("**Dennis Schmal** · Supply Chain Digitalization Manager")
-st.markdown("")
+st.markdown("<p class='subtitle'>Optimize inventory decisions with data-driven calculations</p>", unsafe_allow_html=True)
 
-# Quick info badges
+# Pills showing key info
 st.markdown("""
 <div style='margin-bottom: 2rem;'>
-    <span class='stat-badge'>⚡ 2-hour build</span>
-    <span class='stat-badge'>🚀 Production tool</span>
-    <span class='stat-badge'>💾 Open source</span>
-    <span class='stat-badge'>📊 500+ users/month</span>
+    <span class='metric-pill'>EOQ Model</span>
+    <span class='metric-pill'>Safety Stock</span>
+    <span class='metric-pill'>Reorder Point</span>
 </div>
 """, unsafe_allow_html=True)
 
-# Sidebar - OPTIMIZED
-st.sidebar.markdown("## ⚙️ Configuration")
+# Sidebar
+st.sidebar.markdown("## ⚙️ Input Parameters")
 
 st.sidebar.markdown("### 📊 Demand & Costs")
 annual_demand = st.sidebar.number_input(
@@ -244,8 +247,7 @@ annual_demand = st.sidebar.number_input(
     min_value=100,
     max_value=10000000,
     value=50000,
-    step=1000,
-    help="Total units expected per year"
+    step=1000
 )
 
 unit_cost = st.sidebar.number_input(
@@ -253,8 +255,7 @@ unit_cost = st.sidebar.number_input(
     min_value=0.01,
     max_value=100000.0,
     value=50.0,
-    step=1.0,
-    help="Cost per unit"
+    step=1.0
 )
 
 order_cost = st.sidebar.number_input(
@@ -262,8 +263,7 @@ order_cost = st.sidebar.number_input(
     min_value=1.0,
     max_value=50000.0,
     value=200.0,
-    step=10.0,
-    help="Fixed cost per order"
+    step=10.0
 )
 
 holding_cost_pct = st.sidebar.slider(
@@ -271,8 +271,7 @@ holding_cost_pct = st.sidebar.slider(
     min_value=5,
     max_value=50,
     value=20,
-    step=1,
-    help="Annual holding cost as % of unit cost"
+    step=1
 )
 
 st.sidebar.markdown("### ⏱️ Lead Time & Service")
@@ -282,8 +281,7 @@ lead_time_days = st.sidebar.number_input(
     min_value=1,
     max_value=365,
     value=14,
-    step=1,
-    help="Days from order to delivery"
+    step=1
 )
 
 service_level = st.sidebar.slider(
@@ -291,8 +289,7 @@ service_level = st.sidebar.slider(
     min_value=85,
     max_value=99,
     value=95,
-    step=1,
-    help="Probability of not stocking out"
+    step=1
 )
 
 demand_variability = st.sidebar.slider(
@@ -300,14 +297,18 @@ demand_variability = st.sidebar.slider(
     min_value=5,
     max_value=50,
     value=20,
-    step=5,
-    help="Demand fluctuation (CV%)"
+    step=5
 )
 
 st.sidebar.markdown("---")
-st.sidebar.markdown("**💡 Tool Info**")
-st.sidebar.markdown("Built: 2024 · Tech: Python + Streamlit")
-st.sidebar.markdown("[GitHub](https://github.com/dschmahl) · [Website](https://dennisschmal.de)")
+st.sidebar.markdown("""
+<div style='color: #A0AEC0; font-size: 12px; padding: 1rem 0;'>
+    <strong style='color: #E2E8F0;'>Built by Dennis Schmal</strong><br>
+    Supply Chain Digitalization Manager<br><br>
+    <a href='https://dennisschmal.de' style='color: #3182CE;'>Website</a> • 
+    <a href='https://github.com/dschmahl' style='color: #3182CE;'>GitHub</a>
+</div>
+""", unsafe_allow_html=True)
 
 # Calculations
 holding_cost_per_unit = unit_cost * (holding_cost_pct / 100)
@@ -334,32 +335,30 @@ average_inventory = (eoq / 2) + safety_stock
 total_holding_cost_annual = average_inventory * holding_cost_per_unit
 total_inventory_cost_annual = total_order_cost_annual + total_holding_cost_annual
 
-# Results
-st.markdown("## 📈 Optimization Results")
+# Key metrics
+st.markdown("## 📈 Key Metrics")
 
 col1, col2, col3, col4 = st.columns(4)
 
 with col1:
-    st.metric("EOQ", f"{eoq:,.0f}", help="Economic Order Quantity")
+    st.metric("EOQ", f"{eoq:,.0f}")
     st.caption("units per order")
 
 with col2:
-    st.metric("Safety Stock", f"{safety_stock:,.0f}", help=f"{service_level}% service level")
+    st.metric("Safety Stock", f"{safety_stock:,.0f}")
     st.caption("units buffer")
 
 with col3:
-    st.metric("Reorder Point", f"{reorder_point:,.0f}", help="When to order")
+    st.metric("Reorder Point", f"{reorder_point:,.0f}")
     st.caption("units trigger")
 
 with col4:
-    st.metric("Orders/Year", f"{orders_per_year:.1f}", help="Order frequency")
-    st.caption("orders annually")
+    st.metric("Order Frequency", f"{orders_per_year:.1f}")
+    st.caption("orders/year")
 
 st.markdown("")
 
-# Business Impact
-st.markdown("## 💰 Business Impact")
-
+# Business impact
 col_b1, col_b2, col_b3 = st.columns(3)
 
 with col_b1:
@@ -376,8 +375,90 @@ with col_b3:
 
 st.markdown("")
 
-# Charts
-st.markdown("## 📊 Visual Analysis")
+# Main chart - Inventory simulation with multiple scenarios
+st.markdown("## 📊 Inventory Level Analysis")
+
+time_points = np.linspace(0, 3 * days_between_orders, 200)
+
+# Create data for current scenario and alternatives
+scenarios = {
+    'Current': {'safety': safety_stock, 'color': '#3B82F6'},  # Blue
+    'Conservative': {'safety': z_scores[99] * lead_time_demand_std, 'color': '#10B981'},  # Green
+    'Aggressive': {'safety': z_scores[90] * lead_time_demand_std, 'color': '#F59E0B'},  # Yellow
+}
+
+fig_main = go.Figure()
+
+for scenario_name, scenario_data in scenarios.items():
+    inventory_levels = []
+    scenario_safety = scenario_data['safety']
+    scenario_reorder = average_lead_time_demand + scenario_safety
+    
+    for t in time_points:
+        days_in_cycle = t % days_between_orders
+        if days_in_cycle < lead_time_days:
+            inventory = eoq + scenario_safety - (daily_demand * (days_between_orders - lead_time_days + days_in_cycle))
+        else:
+            inventory = eoq + scenario_safety - (daily_demand * (days_in_cycle - lead_time_days))
+        inventory_levels.append(max(scenario_safety, inventory))
+    
+    fig_main.add_trace(go.Scatter(
+        x=time_points,
+        y=inventory_levels,
+        mode='lines',
+        name=scenario_name,
+        line=dict(color=scenario_data['color'], width=2),
+        hovertemplate='%{y:,.0f} units<extra></extra>'
+    ))
+
+# Add reorder point line
+fig_main.add_hline(
+    y=reorder_point,
+    line_dash="dash",
+    line_color="#EF4444",
+    line_width=1.5,
+    annotation_text="Reorder Point",
+    annotation_position="right",
+    annotation=dict(font=dict(size=11, color='#EF4444'))
+)
+
+fig_main.update_layout(
+    height=400,
+    plot_bgcolor='#0E1117',
+    paper_bgcolor='#0E1117',
+    font=dict(size=12, color='#E2E8F0'),
+    xaxis=dict(
+        showgrid=True,
+        gridcolor='#2D3748',
+        gridwidth=0.5,
+        title='Days',
+        title_font=dict(color='#A0AEC0')
+    ),
+    yaxis=dict(
+        showgrid=True,
+        gridcolor='#2D3748',
+        gridwidth=0.5,
+        title='Inventory (units)',
+        title_font=dict(color='#A0AEC0')
+    ),
+    legend=dict(
+        orientation="h",
+        yanchor="bottom",
+        y=1.02,
+        xanchor="right",
+        x=1,
+        font=dict(color='#E2E8F0')
+    ),
+    margin=dict(l=60, r=40, t=60, b=60),
+    hovermode='x unified'
+)
+
+st.plotly_chart(fig_main, use_container_width=True, config={'displayModeBar': False})
+
+st.markdown("")
+
+# Grid of smaller charts - 2x2 layout
+st.markdown("## 📊 Detailed Analysis")
 
 col_c1, col_c2 = st.columns(2)
 
@@ -386,110 +467,211 @@ with col_c1:
     
     fig_costs = go.Figure()
     
+    categories = ['Ordering', 'Holding']
+    values = [total_order_cost_annual, total_holding_cost_annual]
+    colors = ['#3B82F6', '#10B981']
+    
     fig_costs.add_trace(go.Bar(
-        x=['Ordering', 'Holding'],
-        y=[total_order_cost_annual, total_holding_cost_annual],
-        marker=dict(
-            color=['#3182CE', '#63B3ED'],
-            line=dict(color='white', width=2)
-        ),
-        text=[f'€{total_order_cost_annual:,.0f}', f'€{total_holding_cost_annual:,.0f}'],
+        x=categories,
+        y=values,
+        marker=dict(color=colors),
+        text=[f'€{v:,.0f}' for v in values],
         textposition='inside',
-        textfont=dict(color='white', size=14, family='Arial'),
+        textfont=dict(color='white', size=14),
         hovertemplate='%{x}: €%{y:,.0f}<extra></extra>'
     ))
     
     fig_costs.update_layout(
-        height=350,
-        plot_bgcolor='white',
-        paper_bgcolor='white',
-        font=dict(size=12, color='#4A5568'),
-        xaxis=dict(
-            showgrid=False,
-            title=None
-        ),
+        height=300,
+        plot_bgcolor='#0E1117',
+        paper_bgcolor='#0E1117',
+        font=dict(size=12, color='#E2E8F0'),
+        xaxis=dict(showgrid=False),
         yaxis=dict(
             showgrid=True,
-            gridcolor='#F0F0F0',
-            title='Cost (€)'
+            gridcolor='#2D3748',
+            gridwidth=0.5,
+            title='Cost (€)',
+            title_font=dict(color='#A0AEC0')
         ),
         margin=dict(l=60, r=20, t=20, b=40),
         showlegend=False
     )
     
     st.plotly_chart(fig_costs, use_container_width=True, config={'displayModeBar': False})
-    
-    st.caption(f"Total: €{total_inventory_cost_annual:,.0f}/year")
 
 with col_c2:
-    st.markdown("**Inventory Levels Over Time**")
+    st.markdown("**Cost Impact by Service Level**")
     
-    time_points = np.linspace(0, 2 * days_between_orders, 100)
-    inventory_levels = []
+    service_levels = [85, 90, 95, 99]
+    costs = []
     
-    for t in time_points:
-        days_in_cycle = t % days_between_orders
-        if days_in_cycle < lead_time_days:
-            inventory = eoq + safety_stock - (daily_demand * (days_between_orders - lead_time_days + days_in_cycle))
-        else:
-            inventory = eoq + safety_stock - (daily_demand * (days_in_cycle - lead_time_days))
-        inventory_levels.append(max(safety_stock, inventory))
+    for sl in service_levels:
+        z = z_scores[sl]
+        ss = z * lead_time_demand_std
+        avg_inv = (eoq / 2) + ss
+        total_cost = total_order_cost_annual + (avg_inv * holding_cost_per_unit)
+        costs.append(total_cost)
     
-    fig_sim = go.Figure()
+    fig_service = go.Figure()
     
-    fig_sim.add_trace(go.Scatter(
-        x=time_points,
-        y=inventory_levels,
-        mode='lines',
-        line=dict(color='#3182CE', width=3),
-        fill='tozeroy',
-        fillcolor='rgba(49,130,206,0.1)',
-        hovertemplate='Day %{x:.0f}<br>Inventory: %{y:,.0f}<extra></extra>',
-        showlegend=False
+    fig_service.add_trace(go.Scatter(
+        x=service_levels,
+        y=costs,
+        mode='lines+markers',
+        line=dict(color='#F59E0B', width=3),
+        marker=dict(size=8, color='#F59E0B'),
+        hovertemplate='%{x}%: €%{y:,.0f}<extra></extra>'
     ))
     
-    fig_sim.add_hline(
-        y=reorder_point,
-        line_dash="dash",
-        line_color="#E53E3E",
-        line_width=2,
-        annotation_text=f"Reorder: {reorder_point:,.0f}",
-        annotation_position="right",
-        annotation=dict(font=dict(size=10, color='#E53E3E'))
-    )
-    
-    fig_sim.add_hline(
-        y=safety_stock,
-        line_dash="dot",
-        line_color="#DD6B20",
-        line_width=2,
-        annotation_text=f"Safety: {safety_stock:,.0f}",
-        annotation_position="right",
-        annotation=dict(font=dict(size=10, color='#DD6B20'))
-    )
-    
-    fig_sim.update_layout(
-        height=350,
-        plot_bgcolor='white',
-        paper_bgcolor='white',
-        font=dict(size=12, color='#4A5568'),
+    fig_service.update_layout(
+        height=300,
+        plot_bgcolor='#0E1117',
+        paper_bgcolor='#0E1117',
+        font=dict(size=12, color='#E2E8F0'),
         xaxis=dict(
             showgrid=True,
-            gridcolor='#F0F0F0',
-            title='Days'
+            gridcolor='#2D3748',
+            gridwidth=0.5,
+            title='Service Level (%)',
+            title_font=dict(color='#A0AEC0')
         ),
         yaxis=dict(
             showgrid=True,
-            gridcolor='#F0F0F0',
-            title='Units'
+            gridcolor='#2D3748',
+            gridwidth=0.5,
+            title='Total Cost (€)',
+            title_font=dict(color='#A0AEC0')
         ),
         margin=dict(l=60, r=20, t=20, b=40),
-        hovermode='x unified'
+        showlegend=False
     )
     
-    st.plotly_chart(fig_sim, use_container_width=True, config={'displayModeBar': False})
+    st.plotly_chart(fig_service, use_container_width=True, config={'displayModeBar': False})
+
+st.markdown("")
+
+col_c3, col_c4 = st.columns(2)
+
+with col_c3:
+    st.markdown("**Order Quantity Impact**")
     
-    st.caption("2 order cycles shown")
+    # Show different order quantities
+    order_qtys = np.linspace(eoq * 0.5, eoq * 1.5, 50)
+    total_costs = []
+    
+    for qty in order_qtys:
+        orders = annual_demand / qty
+        order_cost_total = orders * order_cost
+        avg_inv = (qty / 2) + safety_stock
+        holding_cost_total = avg_inv * holding_cost_per_unit
+        total_costs.append(order_cost_total + holding_cost_total)
+    
+    fig_qty = go.Figure()
+    
+    # Total cost curve
+    fig_qty.add_trace(go.Scatter(
+        x=order_qtys,
+        y=total_costs,
+        mode='lines',
+        name='Total Cost',
+        line=dict(color='#8B5CF6', width=3),
+        fill='tozeroy',
+        fillcolor='rgba(139, 92, 246, 0.1)',
+        hovertemplate='Qty: %{x:,.0f}<br>Cost: €%{y:,.0f}<extra></extra>'
+    ))
+    
+    # Optimal point
+    fig_qty.add_vline(
+        x=eoq,
+        line_dash="dash",
+        line_color='#3B82F6',
+        line_width=2,
+        annotation_text=f"EOQ: {eoq:,.0f}",
+        annotation_position="top",
+        annotation=dict(font=dict(size=11, color='#3B82F6'))
+    )
+    
+    fig_qty.update_layout(
+        height=300,
+        plot_bgcolor='#0E1117',
+        paper_bgcolor='#0E1117',
+        font=dict(size=12, color='#E2E8F0'),
+        xaxis=dict(
+            showgrid=True,
+            gridcolor='#2D3748',
+            gridwidth=0.5,
+            title='Order Quantity',
+            title_font=dict(color='#A0AEC0')
+        ),
+        yaxis=dict(
+            showgrid=True,
+            gridcolor='#2D3748',
+            gridwidth=0.5,
+            title='Total Cost (€)',
+            title_font=dict(color='#A0AEC0')
+        ),
+        margin=dict(l=60, r=20, t=20, b=40),
+        showlegend=False
+    )
+    
+    st.plotly_chart(fig_qty, use_container_width=True, config={'displayModeBar': False})
+
+with col_c4:
+    st.markdown("**Monthly Demand Pattern**")
+    
+    # Simulate monthly demand with variability
+    months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    monthly_avg = annual_demand / 12
+    np.random.seed(42)
+    monthly_demand = monthly_avg + np.random.normal(0, monthly_avg * (demand_variability/100), 12)
+    monthly_demand = np.maximum(monthly_demand, 0)
+    
+    fig_monthly = go.Figure()
+    
+    fig_monthly.add_trace(go.Bar(
+        x=months,
+        y=monthly_demand,
+        marker=dict(
+            color=monthly_demand,
+            colorscale='Viridis',
+            showscale=False
+        ),
+        hovertemplate='%{x}: %{y:,.0f} units<extra></extra>'
+    ))
+    
+    # Average line
+    fig_monthly.add_hline(
+        y=monthly_avg,
+        line_dash="dash",
+        line_color='#EF4444',
+        line_width=1.5,
+        annotation_text=f"Avg: {monthly_avg:,.0f}",
+        annotation_position="right",
+        annotation=dict(font=dict(size=10, color='#EF4444'))
+    )
+    
+    fig_monthly.update_layout(
+        height=300,
+        plot_bgcolor='#0E1117',
+        paper_bgcolor='#0E1117',
+        font=dict(size=12, color='#E2E8F0'),
+        xaxis=dict(
+            showgrid=False,
+            title=None
+        ),
+        yaxis=dict(
+            showgrid=True,
+            gridcolor='#2D3748',
+            gridwidth=0.5,
+            title='Demand (units)',
+            title_font=dict(color='#A0AEC0')
+        ),
+        margin=dict(l=60, r=20, t=20, b=40),
+        showlegend=False
+    )
+    
+    st.plotly_chart(fig_monthly, use_container_width=True, config={'displayModeBar': False})
 
 st.markdown("")
 
@@ -501,7 +683,7 @@ with col_i1:
 **📦 Ordering Strategy**
 
 • Order **{eoq:,.0f} units** every **{days_between_orders:.0f} days**  
-• Equals **{orders_per_year:.1f} orders per year**  
+• Frequency: **{orders_per_year:.1f} orders/year**  
 • Ordering cost: **€{total_order_cost_annual:,.0f}/year**
     """)
 
@@ -509,17 +691,17 @@ with col_i2:
     st.success(f"""
 **✅ Inventory Management**
 
-• Keep **{safety_stock:,.0f} units** as safety stock  
-• Reorder at **{reorder_point:,.0f} units**  
+• Safety stock: **{safety_stock:,.0f} units**  
+• Reorder at: **{reorder_point:,.0f} units**  
 • Holding cost: **€{total_holding_cost_annual:,.0f}/year**
     """)
 
 st.markdown("")
 
-# Scenario Comparison
+# Scenario table
 st.markdown("## 🔄 Scenario Comparison")
 
-scenarios = pd.DataFrame({
+scenarios_df = pd.DataFrame({
     'Scenario': ['Conservative (99%)', f'Current ({service_level}%)', 'Aggressive (90%)'],
     'Service Level': ['99%', f'{service_level}%', '90%'],
     'Safety Stock': [
@@ -527,7 +709,7 @@ scenarios = pd.DataFrame({
         f"{safety_stock:,.0f}",
         f"{z_scores[90] * lead_time_demand_std:,.0f}"
     ],
-    'Average Inventory': [
+    'Avg Inventory': [
         f"{(eoq/2) + z_scores[99] * lead_time_demand_std:,.0f}",
         f"{average_inventory:,.0f}",
         f"{(eoq/2) + z_scores[90] * lead_time_demand_std:,.0f}"
@@ -539,7 +721,7 @@ scenarios = pd.DataFrame({
     ]
 })
 
-st.dataframe(scenarios, use_container_width=True, hide_index=True)
+st.dataframe(scenarios_df, use_container_width=True, hide_index=True)
 
 st.markdown("")
 
@@ -575,34 +757,15 @@ st.download_button(
     mime="text/csv"
 )
 
-st.markdown("")
-st.markdown("---")
-
-# Footer
-st.markdown("""
-<div style='text-align: center; color: #718096; font-size: 13px; padding: 2rem 0 1rem 0;'>
-    <p style='margin-bottom: 0.5rem;'><strong style='color: #2D3748;'>Built by Dennis Schmal</strong></p>
-    <p style='margin-bottom: 0.5rem;'>Supply Chain Digitalization Manager | AI Solutions Builder</p>
-    <p style='margin-bottom: 1rem;'>
-        <a href='https://dennisschmal.de' style='color: #3182CE; text-decoration: none;'>Website</a> • 
-        <a href='https://linkedin.com/in/dennis-schmal' style='color: #3182CE; text-decoration: none;'>LinkedIn</a> • 
-        <a href='https://github.com/dschmahl' style='color: #3182CE; text-decoration: none;'>GitHub</a>
-    </p>
-    <p style='font-size: 12px; color: #A0AEC0;'>
-        🎓 Learn to build tools like this in 8-week weekend cohorts • No coding experience required
-    </p>
-</div>
-""", unsafe_allow_html=True)
-
-# Technical note
+# Technical details
 with st.expander("🔧 Technical Details"):
     st.markdown("""
-    **Formulas Used:**
-    - EOQ = √(2 × Annual Demand × Order Cost / Holding Cost)
-    - Safety Stock = Z-score × σ × √Lead Time
+    **Formulas:**
+    - EOQ = √(2 × D × S / H)
+    - Safety Stock = Z × σ × √L  
     - Reorder Point = (Daily Demand × Lead Time) + Safety Stock
     
     **Tech Stack:** Python • NumPy • Pandas • Plotly • Streamlit
     
-    **Open Source:** [View on GitHub](https://github.com/dschmahl)
+    **Built by Dennis Schmal** | [GitHub](https://github.com/dschmahl) • [Website](https://dennisschmal.de)
     """)
